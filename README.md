@@ -61,3 +61,9 @@ The home page uses six whole-card links: three columns on desktop, two on narrow
 ## Illustrated pose guides
 
 Each game has a “دليل الحركات” button opening its own illustrated sketch, with matching numbered Arabic instructions. Opening the popup pauses play; Escape or Close leaves it paused, while “رجوع للعبة” resumes it. Keyboard focus stays in the native dialog. “الكاميرا والتعليمات” opens the camera and text settings panel. Artwork is in `assets/pose-guides/`; the generation prompts and method are recorded there in `prompts.md`.
+
+## GitHub Pages deployment
+
+The workflow in `.github/workflows/pages.yml` checks all six games, builds `dist/`, and deploys it on pushes to `main` or a manual run. In repository Settings → Pages, select **GitHub Actions** as the source. The hosting URL is returned by the successful deployment; do not assume deployment is complete before that.
+
+The intended custom domain is `movmov.me`; the static build includes its `CNAME` file. To attach it, first add `movmov.me` in Settings → Pages → Custom domain, then configure the DNS records GitHub specifies at the domain provider. Enable HTTPS once the certificate is ready. Keep asset links relative so the same release works under a repository path or at a custom domain. The current Sites hosting identity is retained in `.openai/hosting.json`.

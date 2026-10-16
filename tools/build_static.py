@@ -8,6 +8,8 @@ out.mkdir(exist_ok=True)
 for pattern in ("*.html", "*.css"):
     for source in root.glob(pattern):
         shutil.copy2(source, out / source.name)
+if (root / "CNAME").exists():
+    shutil.copy2(root / "CNAME", out / "CNAME")
 shutil.copytree(root / "js", out / "js", dirs_exist_ok=True)
 art = out / "assets" / "pose-guides"
 art.mkdir(parents=True, exist_ok=True)
