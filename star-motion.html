@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#10132a" />
+<title>نجوم الحركة | Star Motion</title>
+<style>
+  :root{--bg:#0c1024;--panel:#171d3a;--line:#ffffff22;--text:#f6f8ff;--dim:#a8b6df;--pink:#ff76ad;--blue:#73e3fc;--gold:#ffde76;--mint:#83f6ce}
+  *{box-sizing:border-box} html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',Tahoma,Arial,sans-serif}
+  body{background:radial-gradient(ellipse at 80% -10%,#4b3d82 0,transparent 42%),radial-gradient(ellipse at -7% 30%,#113f61 0,transparent 47%),var(--bg);padding:24px clamp(12px,3.2vw,45px) 36px}
+  .container{max-width:1380px;margin:auto} .top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+  .brand{display:flex;gap:14px;align-items:center}.mark{display:grid;place-items:center;width:58px;height:58px;border-radius:18px;background:linear-gradient(145deg,#e260c0,#7b7efa);font-size:32px;box-shadow:0 10px 30px #c455cc3e}
+  h1{margin:0;font-size:clamp(24px,3.4vw,36px);line-height:1.2;letter-spacing:-.4px}.eyebrow{font-size:12px;letter-spacing:2px;color:#c9baff;font-weight:800;margin:0 0 5px;direction:ltr;text-align:right}
+  .subtitle{font-size:13px;color:var(--dim);margin:6px 0 0}
+  .top-pill{border:1px solid var(--line);background:#ffffff0d;border-radius:100px;padding:10px 14px;color:#c6d3f1;font-size:13px}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:19px;align-items:start}
+  .panel{background:#151b38c9;border:1px solid var(--line);border-radius:24px;box-shadow:0 25px 60px #0003;overflow:hidden}
+  .board-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:15px 18px}
+  .stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.stat{background:#ffffff11;border:1px solid #ffffff16;padding:8px 12px;border-radius:12px;font-weight:800;font-size:16px;display:flex;align-items:center;gap:7px}.stat small{font-size:11px;color:var(--dim);font-weight:700}
+  .hearts{color:#ff8f9f;letter-spacing:2px}.meter{width:145px;height:8px;border-radius:20px;background:#ffffff18;overflow:hidden}.meter>div{width:100%;height:100%;background:linear-gradient(90deg,#69e5fa,#b89dfb);transition:width .1s linear}
+  .game{position:relative;background:#221946;overflow:hidden;line-height:0}.game canvas{display:block;width:100%;aspect-ratio:16/9;touch-action:none}
+  .overlay{position:absolute;inset:0;display:grid;place-items:center;background:#0c102455;backdrop-filter:blur(3px);z-index:2;line-height:1.6;text-align:center;padding:18px}
+  .overlay.hidden{display:none}.overlay-inner{max-width:470px;background:#151b3ee8;border:1px solid #ffffff33;border-radius:24px;padding:26px 29px;box-shadow:0 18px 75px #0b103488}
+  .overlay-icon{font-size:47px;display:block;margin:0 0 4px}.overlay h2{font-size:clamp(22px,3vw,29px);margin:0 0 8px}.overlay p{font-size:14px;color:#d1dcf8;margin:0}
+  .footer{padding:13px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .actions{display:flex;flex-wrap:wrap;gap:8px}.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:850;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .13s,background .2s;min-height:44px}
+  .btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.55;cursor:wait;transform:none}
+  .primary{color:#1d1743;background:linear-gradient(120deg,#ffe178,#ffb98a)}.secondary{color:#eff6ff;background:#303b69;border:1px solid #ffffff26}.muted{background:transparent;color:#b9c8ea;border:1px solid #ffffff30}.btn.small{padding:10px 13px;min-height:38px;font-size:12px}
+  .help{color:#bdc8e8;font-size:12px;line-height:1.5}.aside{display:grid;gap:16px}.section{padding:18px}.section h3{font-size:17px;margin:0 0 13px}.cam{height:204px;position:relative;overflow:hidden;border-radius:16px;border:1px solid #ffffff20;background:radial-gradient(circle at 50% 30%,#414477,#181a36 70%);display:grid;place-items:center}
+  .cam video,.cam canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}.cam canvas{pointer-events:none}.cam-idle{text-align:center;color:#c1c9f5;line-height:1.45}.cam-idle div{font-size:56px;margin-bottom:6px}.cam-idle span{font-size:12px}
+  .indicator{position:absolute;z-index:1;top:10px;right:10px;background:#151e3ad9;border:1px solid #ffffff3b;border-radius:30px;padding:5px 9px;font-size:11px;color:#e8eeff;line-height:1.3}
+  .cam-status{color:#b7c5ee;font-size:12px;line-height:1.8;margin:12px 0 0;min-height:21px}
+  .instruction{display:flex;align-items:center;gap:12px;margin:10px 0;background:#ffffff0c;padding:10px;border-radius:13px;font-size:13px;color:#e3eaff}
+  .instruction .emoji{display:grid;place-items:center;min-width:39px;height:39px;background:#ffffff15;border-radius:10px;font-size:22px}
+  .smallprint{font-size:12px;color:#a9b8db;line-height:1.85;margin:0}.footnote{font-size:12px;color:#92a5cd;margin-top:20px;line-height:1.7}
+  .touch-controls{display:none;align-items:center;justify-content:center;gap:11px;padding:0 14px 15px}.touch-controls .btn{min-width:90px;touch-action:none;user-select:none}
+  .motion-on{color:#8df7c9}.warn{color:#ffcd95}
+  @media(max-width:1080px){.layout{grid-template-columns:minmax(0,1fr) 255px}.cam{height:177px}}
+  @media(max-width:800px){.layout{grid-template-columns:1fr}.aside{grid-template-columns:1fr 1fr}.cam{height:180px}.touch-controls{display:flex}}
+  @media(max-width:560px){body{padding:13px 9px 20px}.top{margin-bottom:15px}.top-pill{display:none}.brand{gap:10px}.mark{width:46px;height:46px;font-size:25px;border-radius:14px}.eyebrow{font-size:10px}.subtitle{font-size:11px}.panel{border-radius:17px}.board-top{padding:9px}.stat{padding:7px 8px;font-size:13px}.stat small{font-size:10px}.meter{width:66px}.footer{padding:12px}.actions{width:100%}.actions>.btn{flex:1}.aside{grid-template-columns:1fr}.cam{height:220px}.overlay-inner{padding:18px 14px}.overlay-icon{font-size:35px}.overlay p{font-size:12px}.instruction{margin:6px 0}}
+</style>
+<link rel="stylesheet" href="ux.css"><script defer src="js/experience.js"></script></head>
+<body class="game-page">
+<div class="container">
+  <header class="top">
+    <div class="brand"><div class="mark">🌟</div><div><p class="eyebrow">MOVE • PLAY • SMILE</p><h1>نجوم الحركة</h1><p class="subtitle">أنت الريموت كنترول! اتحرك بجسمك والعب بالكاميرا.</p></div></div>
+    <nav class="game-nav" aria-label="خيارات اللعب"><a class="btn muted" href="index.html">→ كل الألعاب</a><button class="btn muted" id="pause" disabled>⏸ إيقاف مؤقت</button><button class="btn muted" id="helpToggle" aria-haspopup="dialog" aria-controls="poseGuide">🧍 دليل الحركات</button><button class="btn muted" id="inputToggle" aria-expanded="false">⚙ التحكم</button><button class="btn muted fullscreen-toggle" type="button">⛶ ملء الشاشة</button></nav>
+  </header>
+  <main class="layout">
+    <section class="panel play-panel">
+      <div class="board-top">
+        <div class="stats"><span class="stat">⭐ <span id="score">0</span> <small>نقطة</small></span><span class="stat">❤️ <span id="hearts" class="hearts">♥♥♥</span></span><span class="stat">⏱ <span id="time">45</span> <small>ثانية</small></span></div>
+        <div class="meter" title="الوقت المتبقي"><div id="progress"></div></div>
+      </div>
+      <div class="game" id="gameDiv">
+        <canvas id="gameCanvas" width="960" height="540" aria-label="لعبة جمع النجوم"></canvas>
+        <div class="overlay" id="overlay"><div class="overlay-inner"><span class="overlay-icon" id="overlayIcon">🌈</span><h2 id="overlayTitle">جاهز لمغامرة النجوم؟</h2><p id="overlayText">اجمع النجوم الذهبية، وابعد عن الصخور. اتحرك يمين وشمال، وارفع إيديك عشان تقفز!</p></div></div>
+      </div>
+      <div class="footer"><div class="actions"><button class="btn primary" id="startCamera">📹 ابدأ بالكاميرا</button><button class="btn secondary" id="startDemo">⌨️ جرّب من غير كاميرا</button><button class="btn muted small" id="restart" hidden>↻ مرة كمان</button></div><button class="btn muted small" id="sound">🔇 الصوت</button></div>
+      <div class="touch-controls" id="touchControls"><button class="btn secondary" id="goRight">➡️ يمين</button><button class="btn primary" id="goJump">⬆️ اقفز</button><button class="btn secondary" id="goLeft">⬅️ شمال</button></div>
+    </section>
+    <aside class="aside" id="gameHelp" aria-label="الكاميرا وطريقة اللعب">
+      <section class="panel section"><button class="btn muted details-close" id="detailsClose" type="button">✕ إغلاق التعليمات</button><h3>📷 الكاميرا بتاعتك</h3><div class="cam"><video autoplay muted playsinline id="webcam"></video><canvas id="skeleton" width="320" height="240"></canvas><div class="cam-idle" id="camIdle"><div>🙆</div><span>اضغط «ابدأ بالكاميرا»<br>عشان جسمك يتحكم في اللعبة</span></div><span class="indicator" id="indicator">● غير متصلة</span></div><p id="camStatus" class="cam-status">اللعبة محتاجة الكاميرا الأمامية وضوء كويس.</p></section>
+      <section class="panel section"><h3>🕹️ إزاي نلعب؟</h3><div class="instruction"><span class="emoji">↔️</span><span>اتحرك <b>يمين وشمال</b> علشان تجمع النجوم.</span></div><div class="instruction"><span class="emoji">🙌</span><span>ارفع <b>إيديك الاتنين</b> عشان تقفز فوق العوائق.</span></div><div class="instruction"><span class="emoji">⭐</span><span>اجمع أكبر عدد نجوم في <b>45 ثانية</b>.</span></div><p class="smallprint">للتجربة بدون كاميرا: الأسهم ← → للحركة، ومسطرة المسافة للقفز. وعلى الموبايل استخدم الأزرار تحت اللعبة.</p></section>
+      <section class="panel section"><h3>🔒 الخصوصية والسلامة</h3><p class="smallprint">اللعبة لا تسجّل الفيديو ولا ترسله إلى خادم تابع لها. معالجة وضعية الجسم تتم على الجهاز باستخدام MediaPipe؛ تحميل مكتبة التتبع والنموذج يحتاج إنترنت، وقد تنطبق سياسة بيانات المكتبة الخارجية. العب في مساحة فاضية بعيد عن الأثاث، ومع إشراف بالغ للصغار.</p></section>
+    </aside>
+  </main>
+  <p class="footnote">نسخة تجريبية (Prototype) • أفضل تجربة على لابتوب بكاميرا أمامية ومتصفح حديث. لو فتح الكاميرا من الملف مباشرة لم ينجح، شغّل الصفحة على localhost أو استضافة HTTPS.</p>
+</div>
+<script>
+(()=>{
+'use strict';
+const W=960,H=540, groundY=445, GAME_TIME=45;
+const $=id=>document.getElementById(id);
+const canvas=$('gameCanvas'),ctx=canvas.getContext('2d');
+const camera=$('webcam'),skeleton=$('skeleton'),sk=skeleton.getContext('2d');
+const ui={score:$('score'), hearts:$('hearts'),time:$('time'),progress:$('progress'),overlay:$('overlay'),icon:$('overlayIcon'),title:$('overlayTitle'),text:$('overlayText'),camStatus:$('camStatus'),camIdle:$('camIdle'),indicator:$('indicator'),startCamera:$('startCamera'),startDemo:$('startDemo'),restart:$('restart'),sound:$('sound')};
+let state='idle',mode='demo',landmarker=null,stream=null,lastVideoTime=-1,lastPoseTime=0,lastPoseSeen=0,poseRaised=false;
+let audio=null,soundOn=false,score=0,health=3,remaining=GAME_TIME,elapsed=0,objects=[],particles=[],spawnTimer=.7,obstacleTimer=2.4;
+let playerX=W/2,targetX=W/2,jumpH=0,jumpVel=0,invincible=0,camReady=false,rafLast=performance.now(),ambientTime=0;
+const keys={left:false,right:false};let touchLeft=false,touchRight=false;
+const rand=(a,b)=>Math.random()*(b-a)+a;
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const roundRect=(x,y,w,h,r)=>{ctx.beginPath();ctx.roundRect(x,y,w,h,r)};
+function drawStar(x,y,r,rot=0,points=5){ctx.beginPath();for(let i=0;i<points*2;i++){let a=rot+(-Math.PI/2)+i*Math.PI/points;const rr=i%2===0?r:r*.46; const xx=x+rr*Math.cos(a),yy=y+rr*Math.sin(a); if(i===0)ctx.moveTo(xx,yy);else ctx.lineTo(xx,yy)}ctx.closePath()}
+function tone(freq=540,dur=.09,wave='sine'){if(!soundOn)return;try{audio??=new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();let o=audio.createOscillator(),g=audio.createGain();o.type=wave;o.frequency.setValueAtTime(freq,audio.currentTime);o.frequency.exponentialRampToValueAtTime(Math.max(50,freq*.68),audio.currentTime+dur);g.gain.setValueAtTime(.10,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+dur);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+dur+.01)}catch(e){}}
+function hud(){ui.score.textContent=score;ui.hearts.textContent='♥'.repeat(health)+'♡'.repeat(3-health);ui.time.textContent=Math.ceil(remaining);ui.progress.style.width=(remaining/GAME_TIME*100)+'%'}
+function overlay(icon,title,text){ui.icon.textContent=icon;ui.title.textContent=title;ui.text.textContent=text;ui.overlay.classList.remove('hidden')}
+function hideOverlay(){ui.overlay.classList.add('hidden')}
+function resetGame(newMode){mode=newMode;score=0;health=3;remaining=GAME_TIME;elapsed=0;objects=[];particles=[];spawnTimer=.7;obstacleTimer=2.5;playerX=W/2;targetX=W/2;jumpVel=0;jumpH=0;invincible=0;state='playing';pauseButton.disabled=false;pauseButton.textContent='⏸ إيقاف مؤقت';poseRaised=false;ui.restart.hidden=true;hud();hideOverlay();ui.startCamera.textContent=mode==='camera'?'🎥 الكاميرا شغالة':'📹 ابدأ بالكاميرا';ui.startDemo.textContent='⌨️ جرّب من غير كاميرا';tone(700,.13)}
+function finish(){if(state!=='playing')return;state='over';pauseButton.disabled=true;ui.restart.hidden=false;let title=health===0?'محاولة شجاعة!':'يا بطل النجوم!';let message=`جمعت ${score} نجمة! ${score>=15?'أداء خارق 🌟':score>=7?'شغل ممتاز! 🎉':'جرّب تاني واجمع أكتر 💛'}`;overlay(score>=15?'🏆':score>=7?'🎉':'💫',title,message);tone(880,.25)}
+function jump(){if(state!=='playing'||jumpH>2||jumpVel!==0)return;jumpVel=780;tone(630,.11)}
+function puff(x,y,col='#ffe58c',count=9){for(let i=0;i<count;i++){const a=rand(0,Math.PI*2),s=rand(35,160);particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.3,.75),max:.75,col,r:rand(2,5)})}}
+function spawn(kind){objects.push({kind,x:rand(65,W-65),y:-40,r:kind==='star'?19:27,vy:rand(165,210)+elapsed*2.3,rot:rand(0,6),phase:rand(0,6),done:false})}
+function update(dt){ambientTime+=dt;if(state!=='playing')return;
+  elapsed+=dt;remaining=Math.max(0,GAME_TIME-elapsed);if(remaining<=0){finish();hud();return}
+  if(mode==='demo'){let vx=(keys.right||touchRight?1:0)-(keys.left||touchLeft?1:0);targetX=clamp(targetX+vx*430*dt,60,W-60)}
+  playerX+=(targetX-playerX)*Math.min(1,dt*(mode==='camera'?9:13));
+  if(jumpVel!==0||jumpH>0){jumpH+=jumpVel*dt;jumpVel-=1910*dt;if(jumpH<=0){jumpH=0;jumpVel=0}}
+  invincible=Math.max(0,invincible-dt);
+  spawnTimer-=dt;obstacleTimer-=dt;
+  if(spawnTimer<=0){spawn('star');spawnTimer=rand(.48,.84)*(1-elapsed/GAME_TIME*.23)}
+  if(obstacleTimer<=0){spawn('rock');obstacleTimer=rand(2.1,3.4)}
+  for(const obj of objects){obj.y+=obj.vy*dt;obj.rot+=dt*(obj.kind==='star'?2.1:1.1);
+    const headY=groundY-69-jumpH;
+    if(obj.kind==='star' && Math.abs(obj.x-playerX)<67 && Math.abs(obj.y-headY)<66){obj.done=true;score++;puff(obj.x,obj.y,'#ffea93',13);tone(780+Math.min(score,12)*28,.095)}
+    else if(obj.kind==='rock'&&invincible===0&&Math.abs(obj.x-playerX)<56&&obj.y>groundY-103&&obj.y<groundY-35 &&jumpH<57){obj.done=true;health--;invincible=1.25;puff(obj.x,obj.y,'#bca2f2',15);tone(230,.25,'sawtooth');if(health<=0){finish();break}}
+    if(obj.y>groundY+80)obj.done=true;
+  }
+  objects=objects.filter(o=>!o.done);
+  for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=150*dt;p.life-=dt}particles=particles.filter(p=>p.life>0);hud();
+}
+function drawBackground(){
+ let sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#4d4cb9');sky.addColorStop(.5,'#6b82d7');sky.addColorStop(1,'#e4adcf');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ // distant moon with halo
+ let glow=ctx.createRadialGradient(770,90,5,770,90,140);glow.addColorStop(0,'#fff6c877');glow.addColorStop(1,'#fff2b700');ctx.fillStyle=glow;ctx.fillRect(630,-45,280,280);ctx.beginPath();ctx.arc(770,90,43,0,Math.PI*2);ctx.fillStyle='#fff3c5';ctx.fill();
+ for(let i=0;i<21;i++){let x=(i*139+33)%W,y=(i*61+24)%255;let a=.35+(.3*Math.sin(ambientTime*1.8+i));ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.beginPath();ctx.arc(x,y,1.5+(i%3)*.7,0,Math.PI*2);ctx.fill()}
+ for(let i=0;i<5;i++){let x=(((i*270+60)+ambientTime*(7+i*2))%(W+300))-180,y=76+(i%3)*58;ctx.fillStyle='#ffffff60';ctx.beginPath();ctx.ellipse(x,y,74,23,0,0,Math.PI*2);ctx.ellipse(x-33,y+1,34,26,0,0,Math.PI*2);ctx.ellipse(x+23,y-11,42,30,0,0,Math.PI*2);ctx.fill()}
+ ctx.fillStyle='#7265b8';ctx.beginPath();ctx.moveTo(0,360);ctx.bezierCurveTo(220,260,260,360,460,305);ctx.bezierCurveTo(690,255,790,365,960,300);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+ ctx.fillStyle='#584b9e';ctx.beginPath();ctx.moveTo(0,411);ctx.bezierCurveTo(160,354,280,427,420,364);ctx.bezierCurveTo(635,335,740,405,960,343);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+ // soft grassy platform
+ ctx.fillStyle='#493979';ctx.fillRect(0,groundY+4,W,H-groundY);ctx.fillStyle='#8ce6bb';ctx.fillRect(0,groundY,W,9);
+ for(let i=0;i<40;i++){const x=i*29+((i*31)%17),y=groundY+23+(i%3)*22;ctx.fillStyle=i%3===0?'#b3a9d2':'#695b99';ctx.beginPath();ctx.ellipse(x,y,4.2,2.4,0,0,Math.PI*2);ctx.fill()}
+ for(let i=0;i<8;i++){let x=35+i*127+Math.sin(i)*30;ctx.fillStyle='#fbda9d';drawStar(x,groundY+14,4,ambientTime*.3+i);ctx.fill()}
+}
+function drawPlayer(){const y=groundY-59-jumpH;if(invincible>0&&Math.floor(invincible*11)%2===0)return;
+ // shadow
+ ctx.fillStyle='#251c4c54';ctx.beginPath();ctx.ellipse(playerX,groundY+4,46-Math.min(jumpH*.11,26),9,0,0,Math.PI*2);ctx.fill();
+ ctx.save();ctx.translate(playerX,y);ctx.rotate(Math.sin(ambientTime*5)*.035);
+ // rabbit ears behind head
+ ctx.fillStyle='#a4f4fa';ctx.strokeStyle='#f5fdff';ctx.lineWidth=3;
+ for(let sign of [-1,1]){ctx.save();ctx.translate(sign*20,-46);ctx.rotate(sign*.2);roundRect(-12,-57,24,69,12);ctx.fill();ctx.stroke();roundRect(-6,-49,12,49,7);ctx.fillStyle='#ffadcb';ctx.fill();ctx.fillStyle='#a4f4fa';ctx.restore()}
+ // cape
+ ctx.fillStyle='#f69ac2';ctx.beginPath();ctx.moveTo(-30,5);ctx.quadraticCurveTo(-65,28,-49,65);ctx.quadraticCurveTo(0,46,49,65);ctx.quadraticCurveTo(65,24,30,5);ctx.fill();
+ // body
+ roundRect(-41,-26,82,85,34);ctx.fillStyle='#89ecf3';ctx.fill();ctx.strokeStyle='#fff7fd';ctx.lineWidth=4;ctx.stroke();
+ // head
+ ctx.beginPath();ctx.ellipse(0,-38,49,43,0,0,Math.PI*2);ctx.fillStyle='#a5faff';ctx.fill();ctx.strokeStyle='#edffff';ctx.lineWidth=4;ctx.stroke();
+ ctx.fillStyle='#322e6d';ctx.beginPath();ctx.ellipse(-16,-43,5.5,7.4,0,0,Math.PI*2);ctx.ellipse(16,-43,5.5,7.4,0,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle='#553b7c';ctx.lineWidth=2.8;ctx.beginPath();ctx.arc(0,-26,10,.1,Math.PI-.1);ctx.stroke();
+ ctx.fillStyle='#ff9fb8';ctx.beginPath();ctx.arc(-30,-25,7,0,Math.PI*2);ctx.arc(30,-25,7,0,Math.PI*2);ctx.fill();
+ // shirt star
+ drawStar(0,15,14,Math.sin(ambientTime)*.15);ctx.fillStyle='#ffda71';ctx.fill();
+ // feet
+ ctx.fillStyle='#6555b0';roundRect(-39,52,32,17,9);ctx.fill();roundRect(7,52,32,17,9);ctx.fill();
+ // waving hands when jumping
+ ctx.lineCap='round';ctx.strokeStyle='#a5faff';ctx.lineWidth=15;ctx.beginPath();if(jumpH>5){ctx.moveTo(-36,-4);ctx.lineTo(-62,-43);ctx.moveTo(36,-4);ctx.lineTo(62,-43)}else{ctx.moveTo(-37,0);ctx.lineTo(-56,21);ctx.moveTo(37,0);ctx.lineTo(56,21)}ctx.stroke();ctx.restore();
+}
+function drawObject(o){ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.rot);
+ if(o.kind==='star'){ctx.shadowColor='#ffe481';ctx.shadowBlur=22;drawStar(0,0,26);ctx.fillStyle='#ffde5e';ctx.fill();ctx.shadowBlur=0;drawStar(0,0,16);ctx.fillStyle='#fff2a7';ctx.fill();ctx.fillStyle='#af6c1e';ctx.beginPath();ctx.arc(-6,-3,2.3,0,Math.PI*2);ctx.arc(6,-3,2.3,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#af6c1e';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(0,2,5,0,Math.PI);ctx.stroke()}
+ else{ctx.fillStyle='#3b2e69';ctx.beginPath();ctx.moveTo(-28,-20);ctx.lineTo(-11,-35);ctx.lineTo(15,-30);ctx.lineTo(34,-10);ctx.lineTo(26,20);ctx.lineTo(-5,33);ctx.lineTo(-34,9);ctx.closePath();ctx.fill();ctx.strokeStyle='#bca9e4';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle='#7766a5';ctx.beginPath();ctx.ellipse(-8,-9,9,6,.5,0,Math.PI*2);ctx.ellipse(15,11,7,9,.4,0,Math.PI*2);ctx.fill()}
+ ctx.restore()}
+function draw(){drawBackground();
+ if(state==='idle'){[135,315,515,705,863].forEach((x,i)=>{const y=180+Math.sin(ambientTime*2+i)*16;ctx.save();ctx.translate(x,y);ctx.rotate(ambientTime*.6+i);drawStar(0,0,27);ctx.fillStyle='#ffe786';ctx.shadowColor='#fff38a';ctx.shadowBlur=15;ctx.fill();ctx.restore()})}
+ for(const o of objects)drawObject(o);
+ drawPlayer();for(const p of particles){ctx.globalAlpha=clamp(p.life/p.max,0,1);ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+ if(state==='playing'&&mode==='camera'&&lastPoseSeen>0&&performance.now()-lastPoseSeen>2000){ctx.fillStyle='#25204dbb';roundRect(310,15,340,38,16);ctx.fill();ctx.font='bold 18px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText('📷 قف قدام الكاميرا عشان نقدر نشوفك',480,40)}
+}
+function frame(t){let dt=Math.min((t-rafLast)/1000,.05);rafLast=t;update(dt);draw();if(mode==='camera'&&camReady&&landmarker&&state==='playing')runPose(t);requestAnimationFrame(frame)}
+function status(message,type=''){ui.camStatus.textContent=message;ui.camStatus.className='cam-status '+type}
+function visible(l){return l&&(l.visibility===undefined||l.visibility>.48)}
+function renderSkeleton(lm){sk.clearRect(0,0,320,240);if(!lm)return;const links=[[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,24],[23,25],[25,27],[24,26],[26,28]];sk.strokeStyle='#86ffe0';sk.lineWidth=3;sk.lineCap='round';for(const [a,b] of links){if(!visible(lm[a])||!visible(lm[b]))continue;sk.beginPath();sk.moveTo(lm[a].x*320,lm[a].y*240);sk.lineTo(lm[b].x*320,lm[b].y*240);sk.stroke()}sk.fillStyle='#ffe578';for(const i of [11,12,13,14,15,16,23,24]){if(visible(lm[i])){sk.beginPath();sk.arc(lm[i].x*320,lm[i].y*240,4.2,0,Math.PI*2);sk.fill()}}}
+function runPose(now){if(now-lastPoseTime<95||camera.readyState<2||camera.currentTime===lastVideoTime)return;lastPoseTime=now;lastVideoTime=camera.currentTime;
+ try{const out=landmarker.detectForVideo(camera,now);const lm=out.landmarks?.[0];renderSkeleton(lm);if(!lm||!visible(lm[11])||!visible(lm[12])){if(now-lastPoseSeen>2500)status('مش شايف جسمك كويس؛ ارجع قدام الكاميرا.','warn');return}
+ lastPoseSeen=now;status('✔ ممتاز! جسمك متتبع، اتحرك والعب.','motion-on');
+ const shoulders=(lm[11].x+lm[12].x)/2;targetX=clamp((1-shoulders)*W,60,W-60);
+ const raised=visible(lm[15])&&visible(lm[16])&&lm[15].y<lm[11].y-.075&&lm[16].y<lm[12].y-.075;
+ if(raised&&!poseRaised)jump();poseRaised=raised;
+ }catch(error){console.warn('Pose detection failed',error);status('في مشكلة مؤقتة في تتبع الجسم. ممكن تجرب طريقة الأسهم.','warn')}
+}
+async function cameraStart(){ui.startCamera.disabled=true;ui.startCamera.textContent='⏳ جاري تشغيل الكاميرا...';status('بنطلب إذن الكاميرا ونحمّل نموذج الذكاء الاصطناعي...');
+ try{
+  if(!navigator.mediaDevices?.getUserMedia)throw new Error('الكاميرا محتاجة HTTPS أو localhost ومتصفح حديث.');
+  if(!stream){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480},frameRate:{ideal:30}},audio:false});camera.srcObject=stream;await camera.play()}
+  ui.camIdle.style.display='none';ui.indicator.textContent='● جاري التحميل';
+  if(!landmarker){const vision=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/+esm');const wasm=await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm');
+   const config={baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',delegate:'GPU'},runningMode:'VIDEO',numPoses:1,minPoseDetectionConfidence:.52,minPosePresenceConfidence:.52,minTrackingConfidence:.52};
+   try{landmarker=await vision.PoseLandmarker.createFromOptions(wasm,config)}catch(gpuError){console.warn('GPU unavailable, switching to CPU',gpuError);config.baseOptions.delegate='CPU';landmarker=await vision.PoseLandmarker.createFromOptions(wasm,config)}
+  }
+  camReady=true;lastPoseSeen=0;lastPoseTime=0;lastVideoTime=-1;ui.indicator.textContent='● الكاميرا شغالة';status('تمام! قف على بُعد متر ونص تقريبًا، وخلي كتفك وإيديك باينين.','motion-on');resetGame('camera');
+ }catch(error){console.error(error);ui.indicator.textContent='● غير متصلة';let msg=error?.name==='NotAllowedError'?'اذن الكاميرا اترفض. اسمح للمتصفح باستخدامها وجرب تاني.':error?.name==='NotFoundError'?'مفيش كاميرا متاحة على الجهاز.':'تعذّر تشغيل تتبع الجسم: '+(error.message||'اتأكد من الإنترنت وجرب تاني.');status(msg,'warn');overlay('📷','محتاجين الكاميرا',msg+' تقدر كمان تجرب اللعبة بالأسهم من غير كاميرا.');state='idle';camReady=false}
+ finally{ui.startCamera.disabled=false;if(!camReady)ui.startCamera.textContent='📹 حاول تشغيل الكاميرا'}
+}
+
+const pauseButton=$('pause');
+function pauseGame(){if(state==='playing'){state='paused';keys.left=keys.right=touchLeft=touchRight=false;overlay('⏸','خد وقتك','اضغط «كمّل اللعب» لما تكون جاهز.');pauseButton.textContent='▶ كمّل اللعب';}else if(state==='paused'){state='playing';hideOverlay();pauseButton.textContent='⏸ إيقاف مؤقت';pauseButton.blur();}}
+pauseButton.addEventListener('click',pauseGame);
+window.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!ev.repeat)pauseGame()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&state==='playing')pauseGame()});
+ui.startCamera.addEventListener('click',cameraStart);
+ui.startDemo.addEventListener('click',()=>{resetGame('demo');status(stream?'الكاميرا متاحة، لكن التحكم الآن بالأسهم.':'بتلعب دلوقتي بالأسهم (أو أزرار الشاشة).');ui.indicator.textContent=stream?'● وضع الأسهم':'● تجربة بدون كاميرا'});
+ui.restart.addEventListener('click',()=>resetGame(mode));
+ui.sound.addEventListener('click',()=>{soundOn=!soundOn;ui.sound.textContent=soundOn?'🔊 الصوت شغال':'🔇 الصوت';if(soundOn)tone(750,.13)});
+window.addEventListener('keydown',ev=>{if(['ArrowLeft','ArrowRight',' ','ArrowUp'].includes(ev.key))ev.preventDefault();if(ev.key==='ArrowLeft')keys.left=true;if(ev.key==='ArrowRight')keys.right=true;if((ev.key===' '||ev.key==='ArrowUp')&&!ev.repeat)jump()});
+window.addEventListener('keyup',ev=>{if(ev.key==='ArrowLeft')keys.left=false;if(ev.key==='ArrowRight')keys.right=false});
+function hold(id,side){const el=$(id);const on=ev=>{ev.preventDefault();if(side==='jump')jump();else if(side==='left')touchLeft=true;else touchRight=true;try{el.setPointerCapture(ev.pointerId)}catch(e){}};const off=()=>{if(side==='left')touchLeft=false;if(side==='right')touchRight=false};el.addEventListener('pointerdown',on);el.addEventListener('pointerup',off);el.addEventListener('pointercancel',off);el.addEventListener('lostpointercapture',off)}
+hold('goLeft','left');hold('goRight','right');hold('goJump','jump');
+window.addEventListener('beforeunload',()=>{if(stream)stream.getTracks().forEach(t=>t.stop());try{landmarker?.close()}catch(e){}});
+hud();requestAnimationFrame(frame);
+})();
+</script>
+<dialog id="poseGuide" class="pose-guide" aria-labelledby="poseGuideTitle" aria-describedby="poseGuideIntro"><header class="pose-guide-header"><div><p>قلّد الحركة خطوة بخطوة</p><h2 id="poseGuideTitle">دليل حركات نجوم الحركة</h2></div><button type="button" class="btn secondary" id="poseGuideZoom" aria-pressed="false">🔍 تكبير الرسم</button><button type="button" class="btn muted" id="poseGuideClose" aria-label="إغلاق دليل الحركات" autofocus>✕ إغلاق</button></header><div class="pose-guide-content"><p id="poseGuideIntro">بص على الرسم، وجرّب الحركة بهدوء. وقت اللعبة بيقف وانت بتشوف الدليل.</p><div class="pose-guide-art"><img id="poseGuideImage" class="pose-guide-image" src="assets/pose-guides/star-motion.png" alt="رسم توضيحي لحركات لعبة نجوم الحركة. التفاصيل مرقمة أسفل الصورة." loading="lazy"></div><p id="poseGuideError" class="pose-guide-error" hidden>الصورة مش متاحة دلوقتي؛ اتبع الخطوات المكتوبة تحت.</p><ol class="pose-guide-steps"><li>اتحرك يمين وشمال عشان الأرنب يتحرك.</li><li>ارفع إيديك الاتنين فوق كتفك عشان تقفز جوه اللعبة. رجّع إيديك لتحت قبل القفزة الجاية.</li></ol><p class="pose-guide-tip">القفز جوه اللعبة بس — خليك واقف على الأرض. خلي جسمك وإيديك ظاهرين للكاميرا.</p></div><footer class="pose-guide-footer"><button type="button" class="btn primary" id="poseGuideReturn">▶ رجوع للعبة</button><button type="button" class="btn secondary" id="detailsToggle" aria-expanded="false" aria-controls="gameHelp">الكاميرا والتعليمات</button></footer></dialog></body>
+</html>
