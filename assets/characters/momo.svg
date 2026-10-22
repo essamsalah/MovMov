@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="480" viewBox="0 0 330 480">
+<defs>
+<linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".44" stop-color="#ebf8ff"/><stop offset="1" stop-color="#8fb7e4"/></linearGradient>
+<linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1e4197"/><stop offset="1" stop-color="#181354"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1cefff"/><stop offset="1" stop-color="#007fe8"/></linearGradient>
+<filter id="shadow" x="-40%" y="-30%" width="180%" height="170%"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#142677" flood-opacity=".33"/></filter>
+</defs>
+<g filter="url(#shadow)" stroke-linecap="round" stroke-linejoin="round">
+<!-- antenna -->
+<path d="M165 92L165 58" stroke="#badbfa" stroke-width="13"/><circle cx="165" cy="48" r="17" fill="url(#cyan)" stroke="#fff" stroke-width="7"/>
+<!-- legs -->
+<path d="M127 334L119 404" stroke="#c1d6f7" stroke-width="31"/><path d="M206 334L211 404" stroke="#c1d6f7" stroke-width="31"/>
+<path d="M119 395Q90 406 91 439Q97 460 162 447L160 405Z" fill="url(#navy)" stroke="#f5ffff" stroke-width="8"/><path d="M183 405L218 394Q257 408 249 440Q241 463 183 451Z" fill="url(#navy)" stroke="#f5ffff" stroke-width="8"/>
+<path d="M94 436Q123 445 156 431M185 432Q213 447 244 436" fill="none" stroke="#21e4ff" stroke-width="7"/>
+<!-- arms -->
+<path d="M118 282Q73 281 63 230" fill="none" stroke="#b6daff" stroke-width="33"/><path d="M210 281Q264 269 275 232" fill="none" stroke="#b6daff" stroke-width="33"/>
+<circle cx="59" cy="220" r="24" fill="url(#navy)" stroke="#fff" stroke-width="7"/><circle cx="277" cy="218" r="24" fill="url(#navy)" stroke="#fff" stroke-width="7"/>
+<path d="M49 210L43 197M61 204L61 190M73 211L81 199M269 206L266 190M281 204L286 192M294 210L300 198" stroke="#85f6ff" stroke-width="7"/>
+<!-- body -->
+<path d="M106 249Q163 230 222 252Q238 314 211 358Q164 379 118 354Q94 309 106 249Z" fill="url(#shell)" stroke="#fff" stroke-width="8"/>
+<path d="M117 300Q160 290 213 300L209 346Q167 368 122 341Z" fill="url(#navy)"/>
+<text x="165" y="343" font-size="53" font-family="Arial,sans-serif" text-anchor="middle" font-weight="900" fill="#30e8ff">M</text>
+<!-- head -->
+<rect x="49" y="92" width="232" height="174" rx="79" fill="url(#shell)" stroke="#fff" stroke-width="9"/>
+<rect x="70" y="117" width="190" height="122" rx="52" fill="url(#navy)" stroke="#6eade0" stroke-width="5"/>
+<!-- eyes and smile -->
+<ellipse cx="123" cy="171" rx="18" ry="22" fill="url(#cyan)"/><ellipse cx="209" cy="171" rx="18" ry="22" fill="url(#cyan)"/>
+<circle cx="129" cy="163" r="6" fill="#eaffff" opacity=".9"/><circle cx="215" cy="163" r="6" fill="#eaffff" opacity=".9"/>
+<path d="M137 204Q166 232 194 203" fill="none" stroke="#33f3ff" stroke-width="9"/>
+<ellipse cx="82" cy="206" rx="12" ry="6" fill="#ff85ce" opacity=".65"/><ellipse cx="250" cy="206" rx="12" ry="6" fill="#ff85ce" opacity=".65"/>
+<ellipse cx="61" cy="166" rx="13" ry="24" fill="#12ceff" stroke="#fff" stroke-width="6"/><ellipse cx="269" cy="166" rx="13" ry="24" fill="#12ceff" stroke="#fff" stroke-width="6"/>
+</g></svg>

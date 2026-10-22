@@ -31,7 +31,7 @@ const video={srcObject:null,play:async()=>{},readyState:2};let stopped=0;const s
 const oldNavigator=globalThis.navigator;Object.defineProperty(globalThis,'navigator',{configurable:true,value:{mediaDevices:{getUserMedia:async()=>stream}}});
 const cam=new MotionCamera(video,{getContext:()=>context},noop);cam.tracker={close:noop};assert.equal(await cam.start(),true);assert.ok(cam.stream);cam.stop();assert.equal(stopped,1);assert.equal(video.srcObject,null);
 let resolve;globalThis.navigator.mediaDevices.getUserMedia=()=>new Promise(r=>resolve=r);const pending=cam.start();cam.stop();resolve(stream);assert.equal(await pending,false);assert.equal(stopped,2,'Late camera request must stop its stream');Object.defineProperty(globalThis,'navigator',{configurable:true,value:oldNavigator});
-const pages=['index.html','star-motion.html','space-explorer.html','jungle-adventure.html','bubble-pop.html','superhero-training.html','animal-moves.html'];for(const name of pages){for(const [,href]of fs.readFileSync(root+'/'+name,'utf8').matchAll(/(?:href|src)="([^"]+)"/g))if(!/^(https?:|#)/.test(href))assert.ok(fs.existsSync(root+'/'+href),name+': '+href);}
-assert.equal([...fs.readFileSync(root+'/index.html','utf8').matchAll(/<article /g)].length,6);
+const pages=['index.html','classic.html','star-motion.html','space-explorer.html','jungle-adventure.html','bubble-pop.html','superhero-training.html','animal-moves.html'];for(const name of pages){for(const [,href]of fs.readFileSync(root+'/'+name,'utf8').matchAll(/(?:href|src)="([^"]+)"/g))if(!/^(https?:|#)/.test(href))assert.ok(fs.existsSync(root+'/'+href),name+': '+href);}
+assert.equal([...fs.readFileSync(root+'/classic.html','utf8').matchAll(/<article /g)].length,6);
 Math.random=originalRandom;
 console.log('PASS: all four game loops and rewards, bubble targets and special poses, animal holds, jungle fruit and damage, extra gestures, pause/restart, camera loss/cancellation/cleanup, and all six home links.');

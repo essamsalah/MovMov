@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="480" viewBox="0 0 330 480">
+<defs>
+<linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe7bf"/><stop offset=".58" stop-color="#ffca9c"/><stop offset="1" stop-color="#df8b67"/></linearGradient>
+<linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#73402f"/><stop offset="1" stop-color="#301928"/></linearGradient>
+<linearGradient id="pink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffb2db"/><stop offset=".5" stop-color="#f844b3"/><stop offset="1" stop-color="#a82fbc"/></linearGradient>
+<filter id="sh" x="-40%" y="-30%" width="180%" height="170%"><feDropShadow dx="0" dy="9" stdDeviation="8" flood-color="#381d76" flood-opacity=".22"/></filter>
+</defs>
+<g filter="url(#sh)" stroke-linecap="round" stroke-linejoin="round">
+<!-- ponytail -->
+<path d="M220 102Q283 83 276 158Q311 192 270 241Q243 255 236 222Z" fill="url(#hair)" stroke="#563042" stroke-width="8"/><path d="M252 102Q280 102 275 142" fill="none" stroke="#bb6c60" stroke-width="9"/>
+<!-- boots -->
+<path d="M125 349L110 416 147 428 172 358Z" fill="#5a277e" stroke="#3e2479" stroke-width="7"/><path d="M185 355L177 425 218 421Q217 389 205 352Z" fill="#602b92" stroke="#3e2479" stroke-width="7"/>
+<path d="M107 409Q88 431 83 445Q80 467 153 458L161 430Z" fill="#9e6eff" stroke="#fff" stroke-width="7"/><path d="M176 428L213 413Q247 435 243 455Q224 469 173 457Z" fill="#9e6eff" stroke="#fff" stroke-width="7"/>
+<path d="M91 448Q124 456 152 445M182 449Q206 456 237 448" fill="none" stroke="#ffb0d5" stroke-width="6"/>
+<!-- arms -->
+<path d="M122 282Q82 281 64 235" fill="none" stroke="#ef52ac" stroke-width="30"/><path d="M208 282Q248 280 268 238" fill="none" stroke="#ef52ac" stroke-width="30"/><circle cx="58" cy="227" r="20" fill="url(#skin)" stroke="#ffede0" stroke-width="5"/><circle cx="274" cy="229" r="20" fill="url(#skin)" stroke="#ffede0" stroke-width="5"/>
+<!-- body and skirt -->
+<path d="M114 264Q164 241 211 264L225 348Q167 385 102 348Z" fill="url(#pink)" stroke="#ffeafa" stroke-width="8"/><path d="M121 348Q162 365 209 347L237 377Q167 400 99 376Z" fill="#6031a5" stroke="#eedcff" stroke-width="6"/><text x="165" y="333" font-size="56" font-family="Arial,sans-serif" text-anchor="middle" font-weight="900" fill="#fff">M</text>
+<!-- hair back -->
+<path d="M76 149Q72 70 162 60Q259 66 257 150L249 222Q230 264 197 246L134 250Q88 252 79 208Z" fill="url(#hair)" stroke="#4a2437" stroke-width="6"/>
+<!-- face -->
+<ellipse cx="166" cy="177" rx="82" ry="86" fill="url(#skin)" stroke="#ffdab9" stroke-width="6"/>
+<!-- hair and band -->
+<path d="M84 165Q63 90 111 74Q149 37 197 67Q248 72 253 137Q228 140 215 113Q197 124 180 109Q142 146 111 128Q105 150 84 165Z" fill="url(#hair)" stroke="#4a2631" stroke-width="6"/>
+<path d="M99 107Q152 53 223 107" fill="none" stroke="#f743bc" stroke-width="15"/>
+<path d="M224 86Q251 75 266 89Q267 111 244 113Z" fill="#ff77ce" stroke="#ffd1ec" stroke-width="4"/>
+<!-- eyes -->
+<ellipse cx="133" cy="181" rx="17" ry="23" fill="white"/><ellipse cx="199" cy="180" rx="17" ry="23" fill="white"/><ellipse cx="138" cy="184" rx="10" ry="15" fill="#393055"/><ellipse cx="194" cy="183" rx="10" ry="15" fill="#393055"/><circle cx="141" cy="176" r="4" fill="white"/><circle cx="197" cy="176" r="4" fill="white"/>
+<path d="M121 153Q135 147 150 154M183 154Q197 147 212 154" stroke="#572c29" stroke-width="7" fill="none"/>
+<ellipse cx="111" cy="211" rx="17" ry="10" fill="#fb7386" opacity=".48"/><ellipse cx="222" cy="208" rx="17" ry="10" fill="#fb7386" opacity=".48"/>
+<path d="M146 216Q164 235 185 217Q182 245 165 247Q148 239 146 216" fill="#70283d"/><path d="M154 232Q170 225 179 233" stroke="#fd97aa" stroke-width="7" fill="none"/>
+</g></svg>
